@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Task;
+
 class TasksController extends Controller
 {
     // getでtasks/にアクセスされた場合の「一覧表示処理」
@@ -11,7 +13,7 @@ class TasksController extends Controller
 
     {
         // タスク一覧を取得
-        $tasks = Tasks::all();
+        $tasks = Task::all();
 
         // タスク一覧ビューでそれを表示
         return view('tasks.index', [
@@ -20,29 +22,26 @@ class TasksController extends Controller
     }
     
         //
-    }
+    
 
      // getでtasks/createにアクセスされた場合の「新規登録画面表示処理」
-   public function create()
+     public function create()
     {
-        $message = new Message;
+        $task = new Task;
 
         // タスク作成ビューを表示
-        return view('messages.create', [
-            'message' => $message,
+        return view('tasks.create', [
+            'task' => $task,
         ]);
     }
+   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
      // postでtasks/にアクセスされた場合の「新規登録処理」
   
+
     
-     public function store(Request $request)
+    public function store(Request $request)
     {
         // タスクを作成
         $task = new Task;
@@ -53,12 +52,7 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
       // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
    
     
@@ -73,12 +67,7 @@ class TasksController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
      // getでtasks/（任意のid）/editにアクセスされた場合の「更新画面表示処理」
   
     
@@ -95,7 +84,6 @@ class TasksController extends Controller
 
    
      // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」
-    
     public function update(Request $request, $id)
     {
         // idの値でメッセージを検索して取得
@@ -108,12 +96,7 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
      // deleteでtasks/（任意のid）にアクセスされた場合の「削除処理」
     
     public function destroy($id)
@@ -127,3 +110,4 @@ class TasksController extends Controller
         return redirect('/');
     }
 
+}
