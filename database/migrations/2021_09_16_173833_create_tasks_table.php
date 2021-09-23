@@ -15,12 +15,10 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content'); 
+            $table->string('content');    // contentカラム追加
             $table->timestamps();
-           
-            Schema::table('tasks', function (Blueprint $table) {
-            $table->string('status',10);
         });
+        
     }
 
     /**
@@ -28,10 +26,10 @@ class CreateTasksTable extends Migration
      *
      * @return void
      */
-    public function down()
+      public function down()
     {
         Schema::dropIfExists('tasks');
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+    }
 }
+     
+
